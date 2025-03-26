@@ -1,0 +1,12 @@
+package org.moviefusion.swagger;
+@Configuration
+@OpenAPIDefinition(
+    info = @Info(
+        title = "Movie Fusion API",
+        version = "1.0",
+        description = "API documentation for MovieFusion Application"
+    )
+)
+public class SwaggerConfig {
+
+}

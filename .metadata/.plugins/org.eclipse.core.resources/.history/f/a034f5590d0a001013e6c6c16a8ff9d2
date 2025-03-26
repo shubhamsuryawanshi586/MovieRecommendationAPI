@@ -1,0 +1,38 @@
+package org.moviefusion;
+
+import java.io.IOException;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MovieFusionApiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MovieFusionApiApplication.class, args);
+		openSwaggerUI();
+	}
+
+	private static void openSwaggerUI() {
+        String url = "http://localhost:8080/swagger-ui.html"; // Adjust port if needed
+        
+        String os = System.getProperty("os.name").toLowerCase();
+        try {
+            if (os.contains("win")) {
+                // Windows: Open with default browser (or use Chrome)
+                new ProcessBuilder("cmd", "/c", "start chrome " + url).start();
+            } else if (os.contains("mac")) {
+                // macOS
+                new ProcessBuilder("open", "-a", "Google Chrome", url).start();
+            } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
+                // Linux
+                new ProcessBuilder("google-chrome", url).start();
+            } else {
+                System.out.println("Unsupported OS, open manually: " + url);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+	}
+}
+ 
