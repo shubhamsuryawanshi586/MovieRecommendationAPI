@@ -12,11 +12,11 @@ public class MovieFusionAPI { // class name changed
 		if(swaggerOpened)
 		{
 			SpringApplication.run(MovieFusionAPI.class, args);
-			SwaggerConfigs.openSwaggerUI();
+//			SwaggerConfigs.openSwaggerUI();
 			swaggerOpened = false;
-		}
+		} 
 	}
- 
+  
 	
-}
+} 
   

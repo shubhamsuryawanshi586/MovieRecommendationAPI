@@ -11,6 +11,8 @@ public class HomeController {
 	{
 		return  "Data got";
 	}
+	
+	
 
 }
      
