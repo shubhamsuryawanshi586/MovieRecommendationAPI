@@ -1,6 +1,6 @@
 package org.moviefusion;
 
-import org.moviefusion.swagger.SwaggerConfigs;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.moviefusion.model.Login;
+import org.moviefusion.model.UserLogin;
 import org.moviefusion.model.UserMaster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +17,7 @@ public class UserMasterRepositoryImpl implements UserMasterRepository {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-	List<Login> list;
+	List<UserLogin> list;
 	
 	@Override
 	public boolean isRegisterUser(UserMaster userMaster) {
@@ -36,7 +36,7 @@ public class UserMasterRepositoryImpl implements UserMasterRepository {
 	}
 
 	@Override
-    public boolean isLogin(Login login) {
+    public boolean isUserLogin(UserLogin login) {
         String sql = "SELECT COUNT(*) FROM user_master WHERE email = ? AND password = ?";
         Integer count = jdbcTemplate.queryForObject(sql, Integer.class, login.getEmail(), login.getPassword());
         return count != null && count > 0;

@@ -1,7 +1,7 @@
 package org.moviefusion.service;
 
 
-import org.moviefusion.model.Login;
+import org.moviefusion.model.UserLogin;
 import org.moviefusion.model.UserMaster;
 import org.moviefusion.repository.UserMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class UserMasterServiceImpl implements UserMasterService{
 	}
 
 	@Override
-	public boolean isLogin(Login login) {
-		return userMasterRepo.isLogin(login);
+	public boolean isUserLogin(UserLogin login) {
+		return userMasterRepo.isUserLogin(login);
 	}
 
 	
