@@ -1,6 +1,7 @@
 package org.moviefusion.service;
 
 
+import org.moviefusion.model.Profile;
 import org.moviefusion.model.UserLogin;
 import org.moviefusion.model.UserMaster;
 import org.moviefusion.repository.UserMasterRepository;
@@ -19,9 +20,20 @@ public class UserMasterServiceImpl implements UserMasterService{
 	}
 
 	@Override
-	public boolean isUserLogin(UserLogin login) {
-		return userMasterRepo.isUserLogin(login);
+	public Profile getUserProfile(int userId) {
+		return userMasterRepo.getUserProfile(userId);
 	}
+	
+	@Override
+	public Profile loginAndFetchUser(UserLogin login) {
+		return userMasterRepo.loginAndFetchUser(login);
+	}
+	
+	@Override
+	public boolean updateUserProfile(int userId, UserMaster updatedUser) {
+		return userMasterRepo.updateUserProfile(userId, updatedUser);
+	}
+
 
 	
 
