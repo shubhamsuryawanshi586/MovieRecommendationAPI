@@ -6,7 +6,7 @@ import org.moviefusion.model.Profile;
 
 public interface AdminMasterRepository {
 	
-	public boolean isRegisterAdmin(AdminMaster adminmaster);
+	public boolean isRegisterAdmin(AdminMaster adminmaster); 
 	
 	public Profile loginAndFetchAdmin(AdminLogin login);
 	

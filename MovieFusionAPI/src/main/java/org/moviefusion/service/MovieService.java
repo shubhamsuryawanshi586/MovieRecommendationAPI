@@ -22,3 +22,4 @@ public interface MovieService {
 	
 	public boolean updateMovieById(int movieId, MovieInfo movieinfo);
 }
+ 

@@ -21,7 +21,7 @@ public class AdminController {
 	
 	@Autowired
 	AdminMasterService adminMasterService;
-	
+	 
 	
 	@PostMapping("/admin/register")
 	public String isRegisterAdmin(@RequestBody AdminMaster adminMaster)

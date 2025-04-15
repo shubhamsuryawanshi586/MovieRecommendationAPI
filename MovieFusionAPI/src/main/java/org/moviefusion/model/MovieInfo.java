@@ -15,7 +15,7 @@ public class MovieInfo {
 	private String movie_actor2;
 	private String movie_actor3;
 	private String movie_language;
-	private String movie_type;
+	private String movie_type; 
 	private String movie_trailer_link;
 	private String watch_link;
 	private BigDecimal movie_budget;

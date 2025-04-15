@@ -55,7 +55,7 @@ public class AdminMasterRepositoryImpl implements AdminMasterRepository {
 	public Profile getAdminProfile(int adminId) {
 	    String sql = "SELECT admin_id, admin_name, email FROM Admin_Master WHERE admin_id = ?";
 	    try {
-	        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> {
+	        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> { 
 	            Profile profile = new Profile();
 	            profile.setUser_id(rs.getInt("admin_id"));
 	            profile.setUser_name(rs.getString("admin_name"));

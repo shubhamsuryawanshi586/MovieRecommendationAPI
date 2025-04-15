@@ -10,3 +10,4 @@ public class UserMaster {
     private String email;
     private String password;
 }
+ 

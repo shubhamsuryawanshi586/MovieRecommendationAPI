@@ -16,4 +16,4 @@ public interface UserMasterRepository {
 	boolean updateUserProfile(int userId, UserMaster updatedUser);
 	
 }
- 
+  

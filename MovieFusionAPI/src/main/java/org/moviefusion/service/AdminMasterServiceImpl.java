@@ -23,7 +23,7 @@ public class AdminMasterServiceImpl  implements AdminMasterService{
 		return adminMasterRepo.loginAndFetchAdmin(login);
 	}
 
-	
+	 
 	@Override
 	public Profile getAdminProfile(int adminId) {
 		return adminMasterRepo.getAdminProfile(adminId);

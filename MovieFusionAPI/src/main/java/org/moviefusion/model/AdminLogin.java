@@ -6,6 +6,6 @@ import lombok.Data;
 public class AdminLogin {
 
 	int loginId;
-	 private String email;
+	 private String email; 
 	 private String password;
 }

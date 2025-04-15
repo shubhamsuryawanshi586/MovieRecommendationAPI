@@ -11,3 +11,4 @@ public class AdminMaster {
     private String password;
     private int userRoleId;
 }
+ 

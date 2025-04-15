@@ -31,7 +31,7 @@ public class UserMasterRepositoryImpl implements UserMasterRepository {
 				ps.setString(1, userMaster.getUser_name());
 				ps.setString(2, userMaster.getEmail());
 				ps.setString(3, userMaster.getPassword());
-			}});
+			}}); 
 		
 		return value > 0;
 	}

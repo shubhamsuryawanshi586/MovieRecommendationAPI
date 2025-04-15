@@ -86,8 +86,32 @@ public class MovieRepositoryImpl implements MovieRepository {
 	@Override
 	public List<MovieInfo> getMovieByCategory(String movie_category)
 	{
-		String sql = "SELECT * FROM Movie_Info where movie_category = ?";
-		list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(MovieInfo.class), movie_category);
+		String sql = "SELECT * FROM Movie_Info where movie_category LIKE ?";
+		String likeQuery = "%" + movie_category + "%";
+		list = jdbcTemplate.query(sql, new RowMapper<MovieInfo>() {
+			@Override
+			public MovieInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				 MovieInfo movieInfo = new MovieInfo();
+		            movieInfo.setMovie_id(rs.getInt(1));
+		            movieInfo.setMovie_title(rs.getString(2));
+		            movieInfo.setMovie_mapping_name(rs.getString(3));
+		            movieInfo.setMovie_description(rs.getString(4));
+		            movieInfo.setMovie_category(rs.getString(5));
+		            movieInfo.setMovie_director_name(rs.getString(6));
+		            movieInfo.setMovie_actor1(rs.getString(7));
+		            movieInfo.setMovie_actor2(rs.getString(8));
+		            movieInfo.setMovie_actor3(rs.getString(9));
+		            movieInfo.setMovie_language(rs.getString(10));
+		            movieInfo.setMovie_type(rs.getString(11));
+		            movieInfo.setMovie_trailer_link(rs.getString(12));
+		            movieInfo.setWatch_link(rs.getString(13));
+		            movieInfo.setMovie_budget(rs.getBigDecimal(14));
+		            movieInfo.setMovie_release_date(rs.getObject(15, java.time.LocalDate.class));
+		            movieInfo.setMovie_country(rs.getString(16));
+		            
+		            return movieInfo;
+			}
+			}, likeQuery);
 		return list;
 	}
 

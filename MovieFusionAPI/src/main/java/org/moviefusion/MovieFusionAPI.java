@@ -9,7 +9,7 @@ public class MovieFusionAPI { // class name changed
 	private static boolean swaggerOpened = true;
 	public static void main(String[] args) {
 		
-		if(swaggerOpened)
+		if(swaggerOpened) 
 		{
 			SpringApplication.run(MovieFusionAPI.class, args);
 //			SwaggerConfigs.openSwaggerUI();

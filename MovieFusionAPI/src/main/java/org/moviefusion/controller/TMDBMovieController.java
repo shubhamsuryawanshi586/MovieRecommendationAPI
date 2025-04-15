@@ -12,7 +12,13 @@ public class TMDBMovieController {
     @Autowired
     private TMDbServiceImpl tmdbService;
     
-    @GetMapping("/fetch-popular")
+//    @GetMapping("/fetch-popular")
+//    public ResponseEntity<String> fetchPopularMovies() {
+//    	tmdbService.fetchAndSavePopularMovies();
+//        return ResponseEntity.ok("Movies fetched and saved.");
+//    }
+    
+    @GetMapping("/all")
     public ResponseEntity<String> fetchPopularMovies() {
     	tmdbService.fetchAndSavePopularMovies();
         return ResponseEntity.ok("Movies fetched and saved.");

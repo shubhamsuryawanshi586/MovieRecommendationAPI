@@ -28,15 +28,23 @@ public class TMDbServiceImpl {
     private RestTemplate restTemplate;
 
     @Autowired
-    private TMDBRepositoryImpl movieInfoRepository;
-
+    private TMDBRepositoryImpl movieInfoRepository; 
+    private static int page = 13; 
     public void fetchAndSavePopularMovies() {
-        String url = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/movie/popular")
-                .queryParam("api_key", apiKey)
-                .queryParam("language", "en-US")
-                .queryParam("page", "1")
-                .toUriString();
-
+    	page++;
+//        String url = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/movie/popular")
+//                .queryParam("api_key", apiKey)
+//                .queryParam("language", "en-US")
+//                .queryParam("page", "1")
+//                .toUriString();
+    	String url = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/discover/movie")
+    	        .queryParam("api_key", apiKey)
+    	        .queryParam("language", "en-US")
+    	        .queryParam("sort_by", "popularity.desc") 
+    	        .queryParam("page", page) 
+    	        .toUriString();
+  
+ 
         Map<String, Object> response = restTemplate.getForObject(url, Map.class);
 
         List<Map<String, Object>> results = (List<Map<String, Object>>) response.get("results");
@@ -96,5 +104,6 @@ public class TMDbServiceImpl {
 
             movieInfoRepository.saveMovies(movie);
         }
+        System.out.println("Page number is : " + page);
     }
 }

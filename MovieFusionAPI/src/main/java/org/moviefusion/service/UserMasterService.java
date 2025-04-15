@@ -15,3 +15,4 @@ public interface UserMasterService {
 	
 	boolean updateUserProfile(int userId, UserMaster updatedUser);
 }
+ 

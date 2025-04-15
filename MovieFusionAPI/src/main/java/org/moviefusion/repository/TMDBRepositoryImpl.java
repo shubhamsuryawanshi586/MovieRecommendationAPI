@@ -20,7 +20,7 @@ public class TMDBRepositoryImpl {
 
 	        jdbcTemplate.update(sql,
 	        		movie.getMovie_title(),
-	                movie.getMovie_mapping_name(),
+	                movie.getMovie_mapping_name(), 
 	                movie.getMovie_description(),
 	                movie.getMovie_category(),
 	                movie.getMovie_director_name(),

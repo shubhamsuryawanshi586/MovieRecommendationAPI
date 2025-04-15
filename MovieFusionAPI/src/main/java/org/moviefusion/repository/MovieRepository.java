@@ -23,3 +23,4 @@ public interface MovieRepository {
 	public boolean updateMovieById(int movieId, MovieInfo movieinfo);
 
 }
+ 

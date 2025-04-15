@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 	
 	@Autowired
-	UserMasterService userMasterService; 
+	UserMasterService userMasterService;  
 	
 	@PostMapping("/user/register")
 	public String isRegisterUser(@RequestBody UserMaster user_master) {
