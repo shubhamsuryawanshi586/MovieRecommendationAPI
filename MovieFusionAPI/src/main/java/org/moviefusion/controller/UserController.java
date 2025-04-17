@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @RestController
 @CrossOrigin("http://localhost:3000")
@@ -71,6 +73,12 @@ public class UserController {
 		return ResponseEntity.ok(updatedUser);
 
 	}
+	
+	 @GetMapping("user/logout")
+	    public String logout(HttpSession session) {
+	        session.invalidate();
+	        return "Logged out successfully.";
+	    }
 
 
 }

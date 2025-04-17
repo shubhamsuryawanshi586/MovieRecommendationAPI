@@ -16,7 +16,5 @@ public class MovieFusionAPI { // class name changed
 			swaggerOpened = false;
 		} 
 	}
-  
-	
 } 
   

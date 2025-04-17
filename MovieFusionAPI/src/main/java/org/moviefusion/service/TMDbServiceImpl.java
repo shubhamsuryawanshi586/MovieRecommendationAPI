@@ -29,7 +29,8 @@ public class TMDbServiceImpl {
 
     @Autowired
     private TMDBRepositoryImpl movieInfoRepository; 
-    private static int page = 13; 
+    private static int page = 14; 
+    
     public void fetchAndSavePopularMovies() {
     	page++;
 //        String url = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/movie/popular")
