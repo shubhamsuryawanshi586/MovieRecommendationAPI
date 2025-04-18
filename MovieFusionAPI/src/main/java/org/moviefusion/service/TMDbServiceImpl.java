@@ -29,10 +29,10 @@ public class TMDbServiceImpl {
 
     @Autowired
     private TMDBRepositoryImpl tmdbRepository; 
-    private static int page = 14; 
+    private static int page = 19; 
     
     public void fetchAndSavePopularMovies() {
-    	page++;
+ 
 //        String url = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/movie/popular")
 //                .queryParam("api_key", apiKey)
 //                .queryParam("language", "en-US")
@@ -42,6 +42,7 @@ public class TMDbServiceImpl {
     	        .queryParam("api_key", apiKey)
     	        .queryParam("language", "en-US")
     	        .queryParam("sort_by", "popularity.desc") 
+    	        .queryParam("with_original_language", "hi")         // Filter movies originally in Hindi
     	        .queryParam("page", page) 
     	        .toUriString();
   
@@ -61,6 +62,13 @@ public class TMDbServiceImpl {
         	{
         		System.out.println("Movie with title : \t" +  movieTitle + "\t" + "Already exists. Skipping..");
         		continue;// Skip saving this movie
+        	}
+        	
+        	// Skip if poster is missing
+        	String posterPath = (String) item.get("poster_path");
+        	if (posterPath == null || posterPath.isEmpty()) {
+        	    System.out.println("Movie with title: \t" + movieTitle + "\t has no poster. Skipping...");
+        	    continue;
         	}
         	
         	 Integer movieId = (Integer) item.get("id");
@@ -115,7 +123,7 @@ public class TMDbServiceImpl {
 
             tmdbRepository.saveMovies(movie);
         }
-        System.out.println("Page number is : " + page);
+        System.out.println("Page number is : " + page++);
     }
     
     private String getLanguageFullName(String code) {

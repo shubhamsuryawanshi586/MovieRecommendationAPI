@@ -2,7 +2,7 @@ package org.moviefusion.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 import org.moviefusion.model.MovieInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -202,6 +202,58 @@ public class MovieRepositoryImpl implements MovieRepository {
 	    return value > 0;
 	}
 
+	@Override
+	public List<String> getAllGenres()
+	{
+		String sql = "SELECT movie_category FROM movie_info WHERE movie_category IS NOT NULL";
+		List<String> categories = jdbcTemplate.queryForList(sql, String.class);
+		
+		Set<String> genreSet = new HashSet<>();
+		
+		for(String category : categories) {
+			if(category != null && !category.isEmpty())
+			{
+				String[] genres = category.split(",");
+				for(String genre : genres){
+					genreSet.add(genre.trim());
+				}
+ 			}
+		}
+		
+		List<String> genreList = new ArrayList<String>(genreSet);
+		Collections.sort(genreList);
+		return genreList;
+	}
+
+	@Override
+	public List<MovieInfo> getMoviesByLanguage(String movie_language) {
+		String sql = "SELECT * FROM movie_info WHERE movie_language = ? ";
+		list = jdbcTemplate.query(sql, new RowMapper<MovieInfo>() {
+			@Override
+			public MovieInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				 MovieInfo movieInfo = new MovieInfo();
+		            movieInfo.setMovie_id(rs.getInt(1));
+		            movieInfo.setMovie_title(rs.getString(2));
+		            movieInfo.setMovie_mapping_name(rs.getString(3));
+		            movieInfo.setMovie_description(rs.getString(4));
+		            movieInfo.setMovie_category(rs.getString(5));
+		            movieInfo.setMovie_director_name(rs.getString(6));
+		            movieInfo.setMovie_actor1(rs.getString(7));
+		            movieInfo.setMovie_actor2(rs.getString(8));
+		            movieInfo.setMovie_actor3(rs.getString(9));
+		            movieInfo.setMovie_language(rs.getString(10));
+		            movieInfo.setMovie_type(rs.getString(11));
+		            movieInfo.setMovie_trailer_link(rs.getString(12));
+		            movieInfo.setWatch_link(rs.getString(13));
+		            movieInfo.setMovie_budget(rs.getBigDecimal(14));
+		            movieInfo.setMovie_release_date(rs.getObject(15, java.time.LocalDate.class));
+		            movieInfo.setMovie_country(rs.getString(16));
+		            
+		            return movieInfo;
+			}
+			}, movie_language);
+		return list;
+	}
 	
 
 }

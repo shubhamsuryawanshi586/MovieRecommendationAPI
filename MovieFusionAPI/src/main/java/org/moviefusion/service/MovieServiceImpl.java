@@ -26,10 +26,12 @@ public class MovieServiceImpl implements MovieService {
 	public MovieInfo getMovieByTitle(String movie_title) {
 		return movieRepo.getMovieByTitle(movie_title);
 	}
+	
 	@Override
 	public List<MovieInfo> getMovieByCategory(String movie_category) { 
 		return movieRepo.getMovieByCategory(movie_category);
 	}
+	
 	@Override
 	public List<MovieInfo> searchMovies(String query) {
 		return movieRepo.searchMovies(query);
@@ -48,6 +50,16 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public boolean updateMovieById(int movieId, MovieInfo movieinfo) {
 		return movieRepo.updateMovieById(movieId, movieinfo);
+	}
+
+	@Override
+	public List<String> getAllGenres() {
+		return movieRepo.getAllGenres();
+	}
+
+	@Override
+	public List<MovieInfo> getMoviesByLanguage(String movie_langauge) {
+		return movieRepo.getMoviesByLanguage(movie_langauge);
 	}
 	
 

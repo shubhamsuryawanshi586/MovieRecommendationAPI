@@ -21,5 +21,9 @@ public interface MovieService {
 	public MovieInfo getMovieById(int movieId);
 	
 	public boolean updateMovieById(int movieId, MovieInfo movieinfo);
+	
+	public List<String> getAllGenres();
+	
+	public List<MovieInfo> getMoviesByLanguage(String movie_langauge);
 }
  
