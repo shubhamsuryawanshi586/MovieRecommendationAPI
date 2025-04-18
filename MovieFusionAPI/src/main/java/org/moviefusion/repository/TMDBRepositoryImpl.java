@@ -37,6 +37,11 @@ public class TMDBRepositoryImpl {
 	        );
 	    }
 	
+	    public boolean checkMovieExistsByMovieTitle(String movieTitle) {
+	    	String sql = "SELECT COUNT(*) FROM movie_info WHERE movie_title = ?";
+	    	 Integer count = jdbcTemplate.queryForObject(sql, Integer.class, movieTitle );
+	 	    return count != null && count > 0;
+	    }
 
 }
 

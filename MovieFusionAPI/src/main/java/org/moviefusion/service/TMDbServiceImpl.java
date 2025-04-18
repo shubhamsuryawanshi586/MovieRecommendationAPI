@@ -28,7 +28,7 @@ public class TMDbServiceImpl {
     private RestTemplate restTemplate;
 
     @Autowired
-    private TMDBRepositoryImpl movieInfoRepository; 
+    private TMDBRepositoryImpl tmdbRepository; 
     private static int page = 14; 
     
     public void fetchAndSavePopularMovies() {
@@ -53,6 +53,15 @@ public class TMDbServiceImpl {
         
 
         for (Map<String, Object> item : results) {
+        	
+        	String movieTitle = (String) item.get("title");
+        	
+        	//Check if the movie already exists in the database by title
+        	if(tmdbRepository.checkMovieExistsByMovieTitle(movieTitle))
+        	{
+        		System.out.println("Movie with title : \t" +  movieTitle + "\t" + "Already exists. Skipping..");
+        		continue;// Skip saving this movie
+        	}
         	
         	 Integer movieId = (Integer) item.get("id");
 	         // 2. Get movie details
@@ -84,7 +93,8 @@ public class TMDbServiceImpl {
             movie.setMovie_title((String) item.get("title"));
             movie.setMovie_mapping_name(((String) item.get("title")).toLowerCase().replace(" ", "-"));
             movie.setMovie_description((String) item.get("overview"));
-            movie.setMovie_language((String) item.get("original_language"));
+            String langCode = (String) item.get("original_language");
+            movie.setMovie_language(getLanguageFullName(langCode));
             movie.setMovie_type(genreList);
             movie.setMovie_category(((List<Map<String, Object>>) details.get("genres")).stream().map(g -> (String) g.get("name")).collect(Collectors.joining(", ")));
             movie.setMovie_director_name(director);
@@ -103,8 +113,58 @@ public class TMDbServiceImpl {
             movie.setMovie_trailer_link("https://www.youtube.com/results?search_query=" + ((String) item.get("title")).replace(" ", "+") + "+trailer");
             movie.setMovie_budget(BigDecimal.valueOf((Integer) details.get("budget")));
 
-            movieInfoRepository.saveMovies(movie);
+            tmdbRepository.saveMovies(movie);
         }
         System.out.println("Page number is : " + page);
     }
+    
+    private String getLanguageFullName(String code) {
+        switch (code) {
+            case "en": return "English";
+            case "hi": return "Hindi";
+            case "mr": return "Marathi";
+            case "te": return "Telugu";
+            case "ta": return "Tamil";
+            case "bn": return "Bengali";
+            case "ml": return "Malayalam";
+            case "kn": return "Kannada";
+            case "gu": return "Gujarati";
+            case "pa": return "Punjabi";
+            case "or": return "Odia";
+            case "ur": return "Urdu";
+            case "as": return "Assamese";
+            case "kok": return "Konkani";
+
+            // Other global languages (in case TMDb gives foreign content)
+            case "es": return "Spanish";
+            case "fr": return "French";
+            case "de": return "German";
+            case "it": return "Italian";
+            case "ru": return "Russian";
+            case "ja": return "Japanese";
+            case "ko": return "Korean";
+            case "zh": return "Chinese";
+            case "pt": return "Portuguese";
+            case "ar": return "Arabic";
+            case "tr": return "Turkish";
+            case "nl": return "Dutch";
+            case "sv": return "Swedish";
+            case "pl": return "Polish";
+            case "fa": return "Persian";
+            case "id": return "Indonesian";
+            case "vi": return "Vietnamese";
+            case "th": return "Thai";
+            case "cs": return "Czech";
+            case "el": return "Greek";
+            case "he": return "Hebrew";
+            case "no": return "Norwegian";
+            case "fi": return "Finnish";
+            case "ro": return "Romanian";
+            case "uk": return "Ukrainian";
+            case "hu": return "Hungarian";
+
+            default: return code; // fallback to code if unknown
+        }
+    }
+
 }

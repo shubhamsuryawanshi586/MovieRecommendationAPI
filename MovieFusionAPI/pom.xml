@@ -77,11 +77,12 @@
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
 
+		<!-- Dependencies go here
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
+ 		-->
 
 		<dependency>
 			<groupId>com.opencsv</groupId>
