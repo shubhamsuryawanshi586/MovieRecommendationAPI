@@ -2,12 +2,14 @@ package org.moviefusion.controller;
 
 import org.moviefusion.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.moviefusion.model.Review;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 public class ReviewController {
 
 	@Autowired
@@ -15,7 +17,8 @@ public class ReviewController {
 	
 	@PostMapping("/review/addreview")
 	public String addReview(@RequestBody Review review){
-		
+		System.out.println(review.toString());
+//		return "";
 		boolean b = reviewService.addReview(review);
 		
 		if(b)
