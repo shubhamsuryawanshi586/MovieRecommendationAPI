@@ -22,12 +22,13 @@ public class MovieRepositoryImpl implements MovieRepository {
 	@Override
 	public boolean isAddNewMovie(MovieInfo movieInfo) {
 		 String sql = "INSERT INTO Movie_Info "
-	         		+ "(movie_title, movie_mapping_name, movie_description, movie_category, movie_director_name, movie_actor1, movie_actor2, movie_actor3,"
-	         		+ " movie_language, movie_type, movie_trailer_link, "
-	         		+ "watch_link, movie_budget, movie_release_date, movie_country) "
-	         		+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	         		+ "(original_movie_id, movie_title, movie_mapping_name, movie_description, movie_category, movie_director_name, movie_actor1, movie_actor2, movie_actor3,"
+	         		+ " movie_language, movie_trailer_link, "
+	         		+ "watch_link, movie_duration, movie_budget, movie_release_date, movie_country) "
+	         		+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		 
 		int value = jdbcTemplate.update(sql,
+				movieInfo.getOriginal_movie_id(),
 				movieInfo.getMovie_title(),
 				movieInfo.getMovie_mapping_name(),
 				movieInfo.getMovie_description(),
@@ -36,10 +37,10 @@ public class MovieRepositoryImpl implements MovieRepository {
                 movieInfo.getMovie_actor1(),
                 movieInfo.getMovie_actor2(),
                 movieInfo.getMovie_actor3(),
-                movieInfo.getMovie_language(),
-                movieInfo.getMovie_type(),
+                movieInfo.getMovie_language(),    
                 movieInfo.getMovie_trailer_link(),
                 movieInfo.getWatch_link(),
+                movieInfo.getMovie_duration(),
                 movieInfo.getMovie_budget(),
                 movieInfo.getMovie_release_date(),
                 movieInfo.getMovie_country()
@@ -55,22 +56,22 @@ public class MovieRepositoryImpl implements MovieRepository {
 			public MovieInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 				 MovieInfo movieInfo = new MovieInfo();
 		            movieInfo.setMovie_id(rs.getInt(1));
-		            movieInfo.setMovie_title(rs.getString(2));
-		            movieInfo.setMovie_mapping_name(rs.getString(3));
-		            movieInfo.setMovie_description(rs.getString(4));
-		            movieInfo.setMovie_category(rs.getString(5));
-		            movieInfo.setMovie_director_name(rs.getString(6));
-		            movieInfo.setMovie_actor1(rs.getString(7));
-		            movieInfo.setMovie_actor2(rs.getString(8));
-		            movieInfo.setMovie_actor3(rs.getString(9));
-		            movieInfo.setMovie_language(rs.getString(10));
-		            movieInfo.setMovie_type(rs.getString(11));
+		            movieInfo.setOriginal_movie_id(rs.getInt(2));
+		            movieInfo.setMovie_title(rs.getString(3));
+		            movieInfo.setMovie_mapping_name(rs.getString(4));
+		            movieInfo.setMovie_description(rs.getString(5));
+		            movieInfo.setMovie_category(rs.getString(6));
+		            movieInfo.setMovie_director_name(rs.getString(7));
+		            movieInfo.setMovie_actor1(rs.getString(8));
+		            movieInfo.setMovie_actor2(rs.getString(9));
+		            movieInfo.setMovie_actor3(rs.getString(10));
+		            movieInfo.setMovie_language(rs.getString(11));	        
 		            movieInfo.setMovie_trailer_link(rs.getString(12));
 		            movieInfo.setWatch_link(rs.getString(13));
-		            movieInfo.setMovie_budget(rs.getBigDecimal(14));
-		            movieInfo.setMovie_release_date(rs.getObject(15, java.time.LocalDate.class));
-		            movieInfo.setMovie_country(rs.getString(16));
-		            
+		            movieInfo.setMovie_duration(rs.getString(14));
+		            movieInfo.setMovie_budget(rs.getBigDecimal(15));
+		            movieInfo.setMovie_release_date(rs.getObject(16, java.time.LocalDate.class));
+		            movieInfo.setMovie_country(rs.getString(17));
 		            return movieInfo;
 			}});
 		return list;
@@ -92,22 +93,23 @@ public class MovieRepositoryImpl implements MovieRepository {
 			@Override
 			public MovieInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 				 MovieInfo movieInfo = new MovieInfo();
-		            movieInfo.setMovie_id(rs.getInt(1));
-		            movieInfo.setMovie_title(rs.getString(2));
-		            movieInfo.setMovie_mapping_name(rs.getString(3));
-		            movieInfo.setMovie_description(rs.getString(4));
-		            movieInfo.setMovie_category(rs.getString(5));
-		            movieInfo.setMovie_director_name(rs.getString(6));
-		            movieInfo.setMovie_actor1(rs.getString(7));
-		            movieInfo.setMovie_actor2(rs.getString(8));
-		            movieInfo.setMovie_actor3(rs.getString(9));
-		            movieInfo.setMovie_language(rs.getString(10));
-		            movieInfo.setMovie_type(rs.getString(11));
+				 	movieInfo.setMovie_id(rs.getInt(1));
+		            movieInfo.setOriginal_movie_id(rs.getInt(2));
+		            movieInfo.setMovie_title(rs.getString(3));
+		            movieInfo.setMovie_mapping_name(rs.getString(4));
+		            movieInfo.setMovie_description(rs.getString(5));
+		            movieInfo.setMovie_category(rs.getString(6));
+		            movieInfo.setMovie_director_name(rs.getString(7));
+		            movieInfo.setMovie_actor1(rs.getString(8));
+		            movieInfo.setMovie_actor2(rs.getString(9));
+		            movieInfo.setMovie_actor3(rs.getString(10));
+		            movieInfo.setMovie_language(rs.getString(11));	        
 		            movieInfo.setMovie_trailer_link(rs.getString(12));
 		            movieInfo.setWatch_link(rs.getString(13));
-		            movieInfo.setMovie_budget(rs.getBigDecimal(14));
-		            movieInfo.setMovie_release_date(rs.getObject(15, java.time.LocalDate.class));
-		            movieInfo.setMovie_country(rs.getString(16));
+		            movieInfo.setMovie_duration(rs.getString(14));
+		            movieInfo.setMovie_budget(rs.getBigDecimal(15));
+		            movieInfo.setMovie_release_date(rs.getObject(16, java.time.LocalDate.class));
+		            movieInfo.setMovie_country(rs.getString(17));
 		            
 		            return movieInfo;
 			}
@@ -126,8 +128,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 	            + "movie_actor1 LIKE ? OR "
 	            + "movie_actor2 LIKE ? OR "
 	            + "movie_actor3 LIKE ? OR "
-	            + "movie_language LIKE ? OR "
-	            + "movie_type LIKE ? OR "
+	            + "movie_language LIKE ? OR "	         
 	            + "movie_country LIKE ?";
 
 	    String likeQuery = "%" + query + "%"; 
@@ -137,24 +138,25 @@ public class MovieRepositoryImpl implements MovieRepository {
 	        public MovieInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 	            MovieInfo movieInfo = new MovieInfo();
 	            movieInfo.setMovie_id(rs.getInt(1));
-	            movieInfo.setMovie_title(rs.getString(2));
-	            movieInfo.setMovie_mapping_name(rs.getString(3));
-	            movieInfo.setMovie_description(rs.getString(4));
-	            movieInfo.setMovie_category(rs.getString(5));
-	            movieInfo.setMovie_director_name(rs.getString(6));
-	            movieInfo.setMovie_actor1(rs.getString(7));
-	            movieInfo.setMovie_actor2(rs.getString(8));
-	            movieInfo.setMovie_actor3(rs.getString(9));
-	            movieInfo.setMovie_language(rs.getString(10));
-	            movieInfo.setMovie_type(rs.getString(11));
+	            movieInfo.setOriginal_movie_id(rs.getInt(2));
+	            movieInfo.setMovie_title(rs.getString(3));
+	            movieInfo.setMovie_mapping_name(rs.getString(4));
+	            movieInfo.setMovie_description(rs.getString(5));
+	            movieInfo.setMovie_category(rs.getString(6));
+	            movieInfo.setMovie_director_name(rs.getString(7));
+	            movieInfo.setMovie_actor1(rs.getString(8));
+	            movieInfo.setMovie_actor2(rs.getString(9));
+	            movieInfo.setMovie_actor3(rs.getString(10));
+	            movieInfo.setMovie_language(rs.getString(11));	        
 	            movieInfo.setMovie_trailer_link(rs.getString(12));
 	            movieInfo.setWatch_link(rs.getString(13));
-	            movieInfo.setMovie_budget(rs.getBigDecimal(14));
-	            movieInfo.setMovie_release_date(rs.getObject(15, java.time.LocalDate.class));
-	            movieInfo.setMovie_country(rs.getString(16));
+	            movieInfo.setMovie_duration(rs.getString(14));
+	            movieInfo.setMovie_budget(rs.getBigDecimal(15));
+	            movieInfo.setMovie_release_date(rs.getObject(16, java.time.LocalDate.class));
+	            movieInfo.setMovie_country(rs.getString(17));
 	            return movieInfo;
 	        }
-	    }, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery);
+	    }, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery, likeQuery);
 	}
 
 	@Override
@@ -176,7 +178,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 	public boolean updateMovieById(int movieId, MovieInfo movieinfo) {
 	    String sql = "UPDATE Movie_info SET movie_title = ?, movie_mapping_name = ?, movie_description = ?, "
 	            + "movie_category = ?, movie_director_name = ?, movie_actor1 = ?, movie_actor2 = ?, movie_actor3 = ?, "
-	            + "movie_language = ?, movie_type = ?, movie_trailer_link = ?, watch_link = ?, movie_budget = ?, movie_release_date = ?, movie_country = ? "
+	            + "movie_language = ?, movie_trailer_link = ?, watch_link = ?, movie_duration = ?, movie_budget = ?, movie_release_date = ?, movie_country = ? "
 	            + "WHERE movie_id = ?";  
 
 	    int value = jdbcTemplate.update(sql,
@@ -189,9 +191,9 @@ public class MovieRepositoryImpl implements MovieRepository {
 	           movieinfo.getMovie_actor2(),
 	           movieinfo.getMovie_actor3(),
 	           movieinfo.getMovie_language(),
-	           movieinfo.getMovie_type(),
 	           movieinfo.getMovie_trailer_link(),
 	           movieinfo.getWatch_link(),
+	           movieinfo.getMovie_duration(),
 	           movieinfo.getMovie_budget(),
 	           movieinfo.getMovie_release_date(),
 	           movieinfo.getMovie_country(),
@@ -232,22 +234,23 @@ public class MovieRepositoryImpl implements MovieRepository {
 			@Override
 			public MovieInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 				 MovieInfo movieInfo = new MovieInfo();
-		            movieInfo.setMovie_id(rs.getInt(1));
-		            movieInfo.setMovie_title(rs.getString(2));
-		            movieInfo.setMovie_mapping_name(rs.getString(3));
-		            movieInfo.setMovie_description(rs.getString(4));
-		            movieInfo.setMovie_category(rs.getString(5));
-		            movieInfo.setMovie_director_name(rs.getString(6));
-		            movieInfo.setMovie_actor1(rs.getString(7));
-		            movieInfo.setMovie_actor2(rs.getString(8));
-		            movieInfo.setMovie_actor3(rs.getString(9));
-		            movieInfo.setMovie_language(rs.getString(10));
-		            movieInfo.setMovie_type(rs.getString(11));
+				 	movieInfo.setMovie_id(rs.getInt(1));
+		            movieInfo.setOriginal_movie_id(rs.getInt(2));
+		            movieInfo.setMovie_title(rs.getString(3));
+		            movieInfo.setMovie_mapping_name(rs.getString(4));
+		            movieInfo.setMovie_description(rs.getString(5));
+		            movieInfo.setMovie_category(rs.getString(6));
+		            movieInfo.setMovie_director_name(rs.getString(7));
+		            movieInfo.setMovie_actor1(rs.getString(8));
+		            movieInfo.setMovie_actor2(rs.getString(9));
+		            movieInfo.setMovie_actor3(rs.getString(10));
+		            movieInfo.setMovie_language(rs.getString(11));	        
 		            movieInfo.setMovie_trailer_link(rs.getString(12));
 		            movieInfo.setWatch_link(rs.getString(13));
-		            movieInfo.setMovie_budget(rs.getBigDecimal(14));
-		            movieInfo.setMovie_release_date(rs.getObject(15, java.time.LocalDate.class));
-		            movieInfo.setMovie_country(rs.getString(16));
+		            movieInfo.setMovie_duration(rs.getString(14));
+		            movieInfo.setMovie_budget(rs.getBigDecimal(15));
+		            movieInfo.setMovie_release_date(rs.getObject(16, java.time.LocalDate.class));
+		            movieInfo.setMovie_country(rs.getString(17));
 		            
 		            return movieInfo;
 			}

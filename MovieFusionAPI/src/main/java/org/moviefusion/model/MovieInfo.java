@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class MovieInfo {
 
 	private int movie_id;
+	private int original_movie_id;
 	private String movie_title;
 	private String movie_mapping_name;
 	private String movie_description;
@@ -15,9 +16,9 @@ public class MovieInfo {
 	private String movie_actor2;
 	private String movie_actor3;
 	private String movie_language;
-	private String movie_type; 
 	private String movie_trailer_link;
 	private String watch_link;
+	private String movie_duration;
 	private BigDecimal movie_budget;
 	private LocalDate movie_release_date;
 	private String movie_country;
@@ -82,12 +83,7 @@ public class MovieInfo {
 	public void setMovie_language(String movie_language) {
 		this.movie_language = movie_language;
 	}
-	public String getMovie_type() {
-		return movie_type;
-	}
-	public void setMovie_type(String movie_type) {
-		this.movie_type = movie_type;
-	}
+
 	public String getMovie_trailer_link() {
 		return movie_trailer_link;
 	}
@@ -117,6 +113,18 @@ public class MovieInfo {
 	}
 	public void setMovie_country(String movie_country) {
 		this.movie_country = movie_country;
+	}
+	public String getMovie_duration() {
+		return movie_duration;
+	}
+	public void setMovie_duration(String movie_duration) {
+		this.movie_duration = movie_duration;
+	}
+	public int getOriginal_movie_id() {
+		return original_movie_id;
+	}
+	public void setOriginal_movie_id(int original_movie_id) {
+		this.original_movie_id = original_movie_id;
 	}
 	
 	
