@@ -1,6 +1,7 @@
 package org.moviefusion.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.moviefusion.model.MovieInfo;
 
@@ -24,7 +25,9 @@ public interface MovieRepository {
 	
 	public List<String> getAllGenres();
 	
-	public List<MovieInfo> getMoviesByLanguage(String movie_language);
+	public List<MovieInfo> getMoviesByLanguageAndGenre(String movie_language, String genre);
+	
+	public List<Map<String, Object>> getMovieCountByLanguage();
 
 }
  

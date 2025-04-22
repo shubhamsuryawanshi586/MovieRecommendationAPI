@@ -1,6 +1,6 @@
 package org.moviefusion.controller;
 
-import java.util.List;
+import java.util.*;
 
 import org.moviefusion.model.MovieInfo;
 import org.moviefusion.service.MovieService;
@@ -94,15 +94,25 @@ public class MovieController {
 		return genres;
 	}
 	
-	@GetMapping("/movie/getmoviesbylanguage/{language}")
-	public List<MovieInfo> getMoviesByLanguage(@PathVariable("language") String movie_language){
+	@GetMapping("/movie/getmoviesbylangaugewithgenre/{language}/{genre}")
+	public List<MovieInfo> getMoviesByLanguageAndGenre(@PathVariable("language") String movie_language, @PathVariable("genre") String genres){
 		
-		list = movieService.getMoviesByLanguage(movie_language);
+		System.out.println(movie_language + " " + genres);
+		list = movieService.getMoviesByLanguageAndGenre(movie_language, genres);
 		if (!list.isEmpty()) {
 			return list;
 		} else
 			return null;
-		
 	}
+	
+	
+	
+	@GetMapping("/movie/getmoviecountbylanguage")
+	public List<Map<String, Object>> getMovieCountByLanguage(){
+		 List<Map<String, Object>> map = movieService.getMovieCountByLanguage();
+	      System.out.println(map);
+	       return map;
+	}
+	
 
 }

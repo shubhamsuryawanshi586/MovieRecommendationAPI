@@ -213,7 +213,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 		Set<String> genreSet = new HashSet<>();
 		
 		for(String category : categories) {
-			if(category != null && !category.isEmpty())
+			if(category != null && !category.isEmpty()) 
 			{
 				String[] genres = category.split(",");
 				for(String genre : genres){
@@ -228,8 +228,9 @@ public class MovieRepositoryImpl implements MovieRepository {
 	}
 
 	@Override
-	public List<MovieInfo> getMoviesByLanguage(String movie_language) {
-		String sql = "SELECT * FROM movie_info WHERE movie_language = ? ";
+	public List<MovieInfo> getMoviesByLanguageAndGenre(String movie_language, String genres) {
+		String sql = "SELECT * FROM movie_info WHERE movie_language = ? && movie_category like  ?";
+		String likeQuery = "%" + genres + "%";
 		list = jdbcTemplate.query(sql, new RowMapper<MovieInfo>() {
 			@Override
 			public MovieInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -254,9 +255,16 @@ public class MovieRepositoryImpl implements MovieRepository {
 		            
 		            return movieInfo;
 			}
-			}, movie_language);
+			}, movie_language, likeQuery);
 		return list;
 	}
+
+	@Override
+	public List<Map<String, Object>> getMovieCountByLanguage() {
+	    String sql = "SELECT movie_language, COUNT(*) AS movie_count FROM movie_info GROUP BY movie_language ORDER BY movie_count DESC";
+	    return jdbcTemplate.queryForList(sql);
+	}
+
 	
 
 }

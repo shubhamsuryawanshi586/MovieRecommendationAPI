@@ -1,6 +1,7 @@
 package org.moviefusion.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.moviefusion.model.MovieInfo;
 import org.moviefusion.repository.MovieRepository;
@@ -58,8 +59,13 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public List<MovieInfo> getMoviesByLanguage(String movie_langauge) {
-		return movieRepo.getMoviesByLanguage(movie_langauge);
+	public List<MovieInfo> getMoviesByLanguageAndGenre(String movie_langauge, String genre) {
+		return movieRepo.getMoviesByLanguageAndGenre(movie_langauge, genre);
+	}
+
+	@Override
+	public List<Map<String, Object>> getMovieCountByLanguage() {		
+		return movieRepo.getMovieCountByLanguage();
 	}
 	
 

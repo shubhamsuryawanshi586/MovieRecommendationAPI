@@ -1,6 +1,7 @@
 package org.moviefusion.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.moviefusion.model.MovieInfo;
 
@@ -24,6 +25,8 @@ public interface MovieService {
 	
 	public List<String> getAllGenres();
 	
-	public List<MovieInfo> getMoviesByLanguage(String movie_langauge);
+	public List<MovieInfo> getMoviesByLanguageAndGenre(String movie_langauge, String genre);
+	
+	public List<Map<String, Object>> getMovieCountByLanguage();
 }
  
