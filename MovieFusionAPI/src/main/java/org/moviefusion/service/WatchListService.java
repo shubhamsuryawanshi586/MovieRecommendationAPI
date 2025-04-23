@@ -9,5 +9,7 @@ public interface WatchListService {
 	public boolean isAddMovieWatchList(int userId, int movieId);
 	
 	public List<Watchlist> getAllWatchList(int userId);
+	
+	public boolean removeMovieFromWatchlist(int userId, int movieId);
 
 }

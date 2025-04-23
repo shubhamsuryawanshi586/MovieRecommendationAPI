@@ -55,4 +55,11 @@ public class WatchListRepositoryImpl  implements WatchListRepository{
 		return watchList;
 	}
 
+	@Override
+	public boolean removeMovieFromWatchlist(int userId, int movieId) {
+		String sql = "DELETE FROM Watchlist where user_id = ? AND movie_id = ? ";
+		int value = jdbcTemplate.update(sql, userId, movieId);
+		return value > 0;
+	}
+
 }

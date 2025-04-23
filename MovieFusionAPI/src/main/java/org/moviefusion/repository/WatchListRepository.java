@@ -11,4 +11,6 @@ public interface WatchListRepository {
 	public boolean existsByUserIdAndMovieId(int userId, int movieId);
 	
 	public List<Watchlist> getAllWatchList(int userId);
+	
+	public boolean removeMovieFromWatchlist(int userId, int movieId);
 }

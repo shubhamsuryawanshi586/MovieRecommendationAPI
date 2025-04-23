@@ -28,4 +28,9 @@ public class WatchListServiceImpl implements WatchListService {
 	public List<Watchlist> getAllWatchList(int userId) {
 		return watchListRepo.getAllWatchList(userId);
 	}
+
+	@Override
+	public boolean removeMovieFromWatchlist(int userId, int movieId) {
+		return watchListRepo.removeMovieFromWatchlist(userId, movieId);
+	}
 }
