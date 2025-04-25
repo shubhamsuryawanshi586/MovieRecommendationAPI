@@ -226,6 +226,29 @@ public class MovieRepositoryImpl implements MovieRepository {
 		Collections.sort(genreList);
 		return genreList;
 	}
+	
+	@Override
+	public List<String> getAllGenresByLangauge(String selectedLanguage) {
+	    
+	    String sql = "SELECT movie_category FROM movie_info WHERE movie_category IS NOT NULL AND movie_language = ?";
+	    List<String> categories = jdbcTemplate.queryForList(sql, String.class, selectedLanguage);
+	    
+	    Set<String> genreSet = new HashSet<>();
+	    
+	    for(String category : categories) {
+	        if(category != null && !category.isEmpty()) {
+	            String[] genres = category.split(",");
+	            for(String genre : genres){
+	                genreSet.add(genre.trim());
+	            }
+	        }
+	    }
+	    
+	    List<String> genreList = new ArrayList<>(genreSet);
+	    Collections.sort(genreList);
+	    return genreList;
+	}
+
 
 	@Override
 	public List<MovieInfo> getMoviesByLanguageAndGenre(String movie_language, String genres) {
@@ -265,6 +288,5 @@ public class MovieRepositoryImpl implements MovieRepository {
 	    return jdbcTemplate.queryForList(sql);
 	}
 
-	
 
 }

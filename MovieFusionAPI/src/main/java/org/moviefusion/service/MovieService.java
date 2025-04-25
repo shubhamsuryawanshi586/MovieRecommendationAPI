@@ -25,6 +25,8 @@ public interface MovieService {
 	
 	public List<String> getAllGenres();
 	
+	public List<String> getAllGenresByLangauge(String selectedLanguage);
+	
 	public List<MovieInfo> getMoviesByLanguageAndGenre(String movie_langauge, String genre);
 	
 	public List<Map<String, Object>> getMovieCountByLanguage();

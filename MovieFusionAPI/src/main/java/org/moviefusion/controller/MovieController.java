@@ -94,6 +94,12 @@ public class MovieController {
 		return genres;
 	}
 	
+	@GetMapping("/movie/getallgenresbylanguage/{selectedlanguage}")
+	public List<String> getAllGenresByLangauge(@PathVariable ("selectedlanguage") String selectedLanguage) {
+		List<String> genres = movieService.getAllGenresByLangauge(selectedLanguage);
+		return genres;
+	}
+	
 	@GetMapping("/movie/getmoviesbylangaugewithgenre/{language}/{genre}")
 	public List<MovieInfo> getMoviesByLanguageAndGenre(@PathVariable("language") String movie_language, @PathVariable("genre") String genres){
 		

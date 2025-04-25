@@ -57,6 +57,11 @@ public class MovieServiceImpl implements MovieService {
 	public List<String> getAllGenres() {
 		return movieRepo.getAllGenres();
 	}
+	
+	@Override
+	public List<String> getAllGenresByLangauge(String selectedLanguage) {
+		return movieRepo.getAllGenresByLangauge(selectedLanguage);
+	}
 
 	@Override
 	public List<MovieInfo> getMoviesByLanguageAndGenre(String movie_langauge, String genre) {
