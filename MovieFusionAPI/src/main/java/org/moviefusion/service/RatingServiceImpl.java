@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class RatingServiceImpl implements RatingService {
 
 	@Autowired
-	RatingRepository ratingRepo;
+	RatingRepository ratingRepo; 
 
 	@Override
 	public boolean addRating(Rating rating) {

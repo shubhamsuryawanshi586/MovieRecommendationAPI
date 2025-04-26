@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public class ReviewRepositoryImpl implements ReviewRepository{
 	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	JdbcTemplate jdbcTemplate; 
 
 	@Override
 	public boolean addReview(Review review) {

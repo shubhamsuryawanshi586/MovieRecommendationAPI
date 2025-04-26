@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class RatingRepositoryImpl implements RatingRepository{
-	
+	 
 	@Autowired
 	JdbcTemplate jdbcTemplate; 
 

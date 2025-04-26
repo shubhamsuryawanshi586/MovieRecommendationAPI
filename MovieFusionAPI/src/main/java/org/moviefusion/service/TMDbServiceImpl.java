@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class TMDbServiceImpl {
+public class TMDbServiceImpl { 
 
     @Value("${tmdb.api.key}")
     private String apiKey;
