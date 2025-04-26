@@ -103,7 +103,7 @@ public class MovieController {
 	@GetMapping("/movie/getmoviesbylangaugewithgenre/{language}/{genre}")
 	public List<MovieInfo> getMoviesByLanguageAndGenre(@PathVariable("language") String movie_language, @PathVariable("genre") String genres){
 		
-		System.out.println(movie_language + " " + genres);
+//		System.out.println(movie_language + " " + genres);
 		list = movieService.getMoviesByLanguageAndGenre(movie_language, genres);
 		if (!list.isEmpty()) {
 			return list;
@@ -116,7 +116,7 @@ public class MovieController {
 	@GetMapping("/movie/getmoviecountbylanguage")
 	public List<Map<String, Object>> getMovieCountByLanguage(){
 		 List<Map<String, Object>> map = movieService.getMovieCountByLanguage();
-	      System.out.println(map);
+//	      System.out.println(map);
 	       return map;
 	}
 	

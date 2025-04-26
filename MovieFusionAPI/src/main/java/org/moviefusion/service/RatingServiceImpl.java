@@ -13,6 +13,15 @@ public class RatingServiceImpl implements RatingService {
 
 	@Override
 	public boolean addRating(Rating rating) {
-		return ratingRepo.addRating(rating);
+		
+		boolean exists = ratingRepo.existsByUserIdAndMovieId(rating.getUser_id(), rating.getMovie_id());
+	    if (exists) {
+	        return false; // Already exists
+	    } else {
+	    	ratingRepo.addRating(rating); // Custom insert method
+	        return true;
+	    }
 	}
+	
+	
 }

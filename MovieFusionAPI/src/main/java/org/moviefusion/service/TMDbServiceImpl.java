@@ -32,13 +32,15 @@ public class TMDbServiceImpl {
     private static int page = 1; 
     // Marathi - 4
     // Hindi - 5
+    // English - 5
+    // Tamil - 4
     public void fetchAndSavePopularMovies() {
  
     	String url = UriComponentsBuilder.fromHttpUrl(BASE_URL + "/discover/movie")
     	        .queryParam("api_key", apiKey)
     	        .queryParam("language", "en-US")
     	        .queryParam("sort_by", "popularity.desc") 
-    	        .queryParam("with_original_language", "mr")         // Filter for Hindi language
+    	        .queryParam("with_original_language", "te")         // Filter for Hindi language
     	        .queryParam("with_origin_country", "IN")            // Filter for Indian movies    	 
     	        .queryParam("page", page)
     	        .toUriString();

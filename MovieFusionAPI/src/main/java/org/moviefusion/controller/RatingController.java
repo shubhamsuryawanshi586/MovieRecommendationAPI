@@ -18,13 +18,12 @@ public class RatingController {
 	@PostMapping("/rating/addrating")
 	public String addRating(@RequestBody Rating rating)
 	{
-		System.out.println(rating.toString());
-		//return "";
-		boolean b = ratingService.addRating(rating);
-		if(b)
+		//System.out.println(rating.toString());
+		boolean added = ratingService.addRating(rating);
+		if(added)
 			return "Rating Added";
 		else
-			return "Rating adding failed";
+			return "You have Already given rating to this Movie...!!";
 	}
 
 }

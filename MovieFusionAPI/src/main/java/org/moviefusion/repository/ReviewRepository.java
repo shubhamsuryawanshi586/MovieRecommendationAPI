@@ -6,4 +6,6 @@ public interface ReviewRepository {
 	
 	public boolean addReview(Review review);
 
+	boolean existsByUserIdAndMovieId(int userId, int movieId);
+
 }

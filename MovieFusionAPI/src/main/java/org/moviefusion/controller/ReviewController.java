@@ -18,12 +18,10 @@ public class ReviewController {
 	@PostMapping("/review/addreview")
 	public String addReview(@RequestBody Review review){
 		System.out.println(review.toString());
-//		return "";
-		boolean b = reviewService.addReview(review);
-		
-		if(b)
+		boolean added = reviewService.addReview(review);
+		if(added)
 			return "Review Added";
 		else
-			return "Review Failed";
+			return "You have already reviewed this movie!";
 	}
 }

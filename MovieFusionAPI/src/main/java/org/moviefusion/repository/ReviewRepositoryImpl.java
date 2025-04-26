@@ -28,5 +28,12 @@ public class ReviewRepositoryImpl implements ReviewRepository{
 			}});
 		return value > 0;
 	}
+	
+	@Override
+	public boolean existsByUserIdAndMovieId(int userId, int movieId) {
+	    String sql = "SELECT COUNT(*) FROM Review WHERE user_id = ? AND movie_id = ?";
+	    Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId, movieId);
+	    return count != null && count > 0;
+	}
 
 }

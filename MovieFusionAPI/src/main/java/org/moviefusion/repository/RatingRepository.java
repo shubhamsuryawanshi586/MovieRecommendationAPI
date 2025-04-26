@@ -6,4 +6,6 @@ public interface RatingRepository {
 	
 	public boolean addRating(Rating rating);
 
+	boolean existsByUserIdAndMovieId(int userId, int movieId);
+
 }

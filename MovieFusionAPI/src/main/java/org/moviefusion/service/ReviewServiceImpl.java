@@ -13,6 +13,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public boolean addReview(Review review) {
-		return reviewRepo.addReview(review);
+		boolean exists = reviewRepo.existsByUserIdAndMovieId(review.getUser_id(), review.getMovie_id());
+	    if (exists) {
+	        return false; // Already exists
+	    } else {
+	    	reviewRepo.addReview(review); // Custom insert method
+	        return true;
+	    }
 	}
 }
