@@ -21,7 +21,7 @@ public class ReviewRepositoryImpl implements ReviewRepository{
 		int value = jdbcTemplate.update(sql, new PreparedStatementSetter() {
 
 			@Override
-			public void setValues(PreparedStatement ps) throws SQLException {
+		 	public void setValues(PreparedStatement ps) throws SQLException {
 				ps.setInt(1, review.getUser_id());
 				ps.setInt(2, review.getMovie_id());
 				ps.setString(3, review.getReview_text());	

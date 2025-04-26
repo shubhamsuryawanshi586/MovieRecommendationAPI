@@ -8,4 +8,4 @@ public interface ReviewRepository {
 
 	boolean existsByUserIdAndMovieId(int userId, int movieId);
 
-}
+} 

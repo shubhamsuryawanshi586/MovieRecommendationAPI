@@ -12,7 +12,7 @@ import org.moviefusion.model.Review;
 @CrossOrigin("http://localhost:3000")
 public class ReviewController {
 
-	@Autowired
+	@Autowired 
 	ReviewService reviewService;
 	
 	@PostMapping("/review/addreview")

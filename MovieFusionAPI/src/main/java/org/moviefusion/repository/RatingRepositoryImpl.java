@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public class RatingRepositoryImpl implements RatingRepository{
 	
 	@Autowired
-	JdbcTemplate jdbcTemplate;
+	JdbcTemplate jdbcTemplate; 
 
 	@Override
 	public boolean addRating(Rating rating) {

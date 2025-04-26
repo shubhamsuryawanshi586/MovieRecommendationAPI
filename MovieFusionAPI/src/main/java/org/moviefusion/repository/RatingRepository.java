@@ -9,3 +9,4 @@ public interface RatingRepository {
 	boolean existsByUserIdAndMovieId(int userId, int movieId);
 
 }
+ 

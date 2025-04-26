@@ -21,7 +21,7 @@ public class RatingServiceImpl implements RatingService {
 	    	ratingRepo.addRating(rating); // Custom insert method
 	        return true;
 	    }
-	}
+	} 
 	
 	
 }
